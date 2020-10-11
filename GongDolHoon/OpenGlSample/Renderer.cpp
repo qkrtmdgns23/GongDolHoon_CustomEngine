@@ -20,6 +20,7 @@ Renderer::Renderer(const char* title, int window_width, int window_height,
 
 Renderer::~Renderer()
 {
+	delete main_camera_;
 	glfwTerminate();
 }
 

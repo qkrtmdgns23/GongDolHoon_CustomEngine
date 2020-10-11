@@ -9,7 +9,7 @@ Mesh::Mesh(const char* obj_path)
 	init_and_send_vertex_buffer();
 	init_and_send_uv_buffer();
 	init_and_send_normal_buffer();
-	vertex_attrib_pointer_and_enable_vertex_array();
+	define_vertex_attrib_pointer_and_enable_vertex_array();
 }
 
 Mesh::~Mesh()
@@ -46,7 +46,7 @@ void Mesh::init_and_send_normal_buffer()
 	glBufferData(GL_ARRAY_BUFFER, normals_.size() * sizeof(glm::vec3), &normals_[0], GL_STATIC_DRAW);
 }
 
-void Mesh::vertex_attrib_pointer_and_enable_vertex_array()
+void Mesh::define_vertex_attrib_pointer_and_enable_vertex_array()
 {
 	// Vertex Position
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
