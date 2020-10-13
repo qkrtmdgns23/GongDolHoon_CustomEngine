@@ -1,23 +1,45 @@
-#ifndef TEXTURE_H
-#define TEXTURE_H
+#ifndef GDH_ENGINE_TEXTURE_H
+#define GDH_ENGINE_TEXTURE_H
+
+#include <string>
 
 // library
-#include "include/GL/glew.h"		
+#include "include/GL/glew.h"	
 
-// for using tex_load_type_t
-#include "FileManager.h"
+namespace gdh_engine {
+	namespace object {
+		enum class TextureType;
 
-class Texture
-{
-public:
-	Texture(const char* texture_path, tex_load_type_t texture_type);
-	~Texture();
+		class Texture
+		{
+		public:
+			Texture(std::string texture_path, TextureType type_of_texture, TextureType alpha_data_type);
+			Texture(const char* texture_path, TextureType type_of_texture, TextureType alpha_data_type);
+			~Texture() {}
 
-	GLuint get_texture_id() const;
+			GLuint get_texture_id() const
+			{
+				return texture_id_;
+			}
 
-private:
-	GLuint texture_id_;
+		private:
+			GLuint texture_id_;
 
-};
+			int texture_width_;
+			int texture_height_;
+			int texture_nr_channels_;
 
-#endif /* TEXTURE_H */
+		};
+
+		enum class TextureType
+		{
+			k2DTexture = 0,
+			k3DTexture,
+			kRGB,
+			kRGBA,
+		};
+
+	} // namespace object
+} // namespace gdh_engine
+
+#endif // GDH_ENGINE_TEXTURE_H

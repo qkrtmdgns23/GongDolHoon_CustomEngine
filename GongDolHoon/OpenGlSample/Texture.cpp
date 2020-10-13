@@ -1,25 +1,80 @@
-#include "Texture.h"
-#include "FileManager.h"
+// custom header
+#include "texture.h"
+#include "file_manager.h"
 
+namespace gdh_engine {
+	namespace object {
+		Texture::Texture(std::string texture_path, TextureType type_of_texture, TextureType alpha_data_type)
+		{
+			this->texture_width_ = 0;
+			this->texture_height_ = 0;
+			this->texture_nr_channels_ = 0;
+			this->texture_id_ = 0;
 
-Texture::Texture(const char* texture_path, tex_load_type_t texture_type)
-{
-	if (texture_type == tex_load_type_t::DDS)
-	{
-		texture_id_ = FileManager::get_instance()->load_dds(texture_path);
-	}
-	else if (texture_type == tex_load_type_t::BMP)
-	{
-		texture_id_ = FileManager::get_instance()->load_bmp(texture_path);
-	}
-}
+			glGenTextures(1, &texture_id_);
 
-Texture::~Texture()
-{
-	glDeleteTextures(1, &this->texture_id_);
-}
+			if (type_of_texture == TextureType::k2DTexture)
+			{
+				glBindTexture(GL_TEXTURE_2D, texture_id_);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+			}
+			else if (type_of_texture == TextureType::k3DTexture)
+			{
+				glBindTexture(GL_TEXTURE_2D, texture_id_);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+			}
 
-GLuint Texture::get_texture_id() const
-{
-	return texture_id_;
-}
+			if (type_of_texture == TextureType::k2DTexture)
+			{
+				gdh_engine::manager::file::FileManager::get_instance()->LoadTexture2D
+				(texture_path, this->texture_width_, this->texture_height_, this->texture_nr_channels_, alpha_data_type);
+			}
+			else if (type_of_texture == TextureType::k3DTexture)
+			{
+				gdh_engine::manager::file::FileManager::get_instance()->LoadTexture2D
+				(texture_path, this->texture_width_, this->texture_height_, this->texture_nr_channels_, alpha_data_type);
+			}
+
+		}
+
+		Texture::Texture(const char* texture_path, TextureType type_of_texture, TextureType alpha_data_type)
+		{
+			this->texture_width_ = 0;
+			this->texture_height_ = 0;
+			this->texture_nr_channels_ = 0;
+
+			glGenTextures(1, &texture_id_);
+
+			if (type_of_texture == TextureType::k2DTexture)
+			{
+				glBindTexture(GL_TEXTURE_2D, texture_id_);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+			}
+			else if (type_of_texture == TextureType::k3DTexture)
+			{
+				glBindTexture(GL_TEXTURE_2D, texture_id_);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+			}
+
+			if (type_of_texture == TextureType::k2DTexture)
+			{
+				gdh_engine::manager::file::FileManager::get_instance()->LoadTexture2D
+				(texture_path, this->texture_width_, this->texture_height_, this->texture_nr_channels_, alpha_data_type);
+			}
+			else if (type_of_texture == TextureType::k3DTexture)
+			{
+				gdh_engine::manager::file::FileManager::get_instance()->LoadTexture2D
+				(texture_path, this->texture_width_, this->texture_height_, this->texture_nr_channels_, alpha_data_type);
+			}
+
+		}
+	}	// namespace object
+}	// namespace gdh_engine

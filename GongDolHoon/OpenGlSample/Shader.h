@@ -1,5 +1,5 @@
-#ifndef SHADER_H
-#define SHADER_H
+#ifndef GDH_ENGINE_SHADER_H
+#define GDH_ENGINE_SHADER_H
 
 #include <string>
 
@@ -7,37 +7,57 @@
 #include "include/GL/glew.h"	
 #include "glm/glm.hpp"
 
-class Shader
-{
-public:
-	Shader(const char* vertex_shader_path, const char* fragment_shader_path);
-	~Shader();
+namespace gdh_engine {
+	namespace object {
+		class Shader;
 
-	// use or unuse shader
-	void use();
-	void un_use();
+		class Shader
+		{
+		public:
+			Shader(const char* vertex_path, const char* fragment_path);
+			Shader(std::string vertex_path, std::string fragment_path);
 
-	// utilty uniform funcs
-	void set_bool(const std::string& name, bool value);
-	void set_int(const std::string& name, int value);
-	void set_float(const std::string& name, float value);
-	void set_vec2(const std::string& name, const glm::vec2& value);
-	void set_vec2(const std::string& name, float x, float y);
-	void set_vec3(const std::string& name, const glm::vec3& value);
-	void set_vec3(const std::string& name, float x, float y, float z);
-	void set_vec4(const std::string& name, const glm::vec4& value);
-	void set_vec4(const std::string& name, float x, float y, float z, float w);
-	void set_mat2(const std::string& name, const glm::mat2& mat);
-	void set_mat3(const std::string& name, const glm::mat3& mat);
-	void set_mat4(const std::string& name, const glm::mat4& mat);
+			~Shader();
 
-	// Property
-	GLuint get_program_id() const;
-	
+			void UseShader();
+			void UnuseShader();
 
-private:
-	GLuint program_id_;
+			// this is not setter function.
+			void SetBooleanDataTypeUniformVariable(const std::string& name, bool value) const;
+			void SetBooleanDataTypeUniformVariable(const char* name, bool value) const;
+			void SetIntegerDataTypeUniformVariable(const std::string& name, int value) const;
+			void SetIntegerDataTypeUniformVariable(const char* name, int value) const;
+			void SetFloatDataTypeUniformVariable(const std::string& name, float value) const;
+			void SetFloatDataTypeUniformVariable(const char* name, float value) const;
+			void SetVector2TypeUniformVariable(const std::string& name, glm::vec2& value) const;
+			void SetVector2TypeUniformVariable(const char* name, glm::vec2& value) const;
+			void SetVector2TypeUniformVariable(const std::string& name, float x, float y) const;
+			void SetVector2TypeUniformVariable(const char* name, float x, float y) const;
+			void SetVector3TypeUniformVariable(const std::string& name, glm::vec3& value) const;
+			void SetVector3TypeUniformVariable(const char* name, glm::vec3& value) const;
+			void SetVector3TypeUniformVariable(const std::string& name, float x, float y, float z) const;
+			void SetVector3TypeUniformVariable(const char* name, float x, float y, float z) const;
+			void SetVector4TypeUniformVariable(const std::string& name, glm::vec4& value) const;
+			void SetVector4TypeUniformVariable(const char* name, glm::vec4& value) const;
+			void SetVector4TypeUniformVariable(const std::string& name, 
+				float x, float y, float z, float w) const;
+			void SetVector4TypeUniformVariable(const char* name,
+				float x, float y, float z, float w) const;
+			void SetMatrix2TypeUniformVariable(const std::string& name, const glm::mat2& mat) const;
+			void SetMatrix2TypeUniformVariable(const char* name, const glm::mat2& mat) const;
+			void SetMatrix3TypeUniformVariable(const std::string& name, const glm::mat3& mat) const;
+			void SetMatrix3TypeUniformVariable(const char* name, const glm::mat3& mat) const;
+			void SetMatrix4TypeUniformVariable(const std::string& name, const glm::mat4& mat) const;
+			void SetMatrix4TypeUniformVariable(const char* name, const glm::mat4& mat) const;
 
-};
+			GLuint get_shader_program_id() const
+			{
+				return shader_program_identity_;
+			}
+		private:
+			GLuint shader_program_identity_;
+		};
+	}	// namespace object
+}	// namespace gdh_engine
 
-#endif /* SHADER_H */
+#endif // GDH_ENGINE_SHADER_H
