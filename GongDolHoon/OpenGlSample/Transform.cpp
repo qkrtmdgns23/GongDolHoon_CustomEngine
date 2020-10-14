@@ -35,5 +35,15 @@ namespace gdh_engine {
 			this->model_matrix_ = glm::translate(this->model_matrix_, this->obj_position_ - this->obj_origin_);
 			this->model_matrix_ = glm::scale(this->model_matrix_, this->obj_scale_);
 		}
+
+		void Transform::SetActive()
+		{
+			is_transform_active_ = true;
+		}
+
+		void Transform::SetUnActive()
+		{
+			is_transform_active_ = false;
+		}
 	}	// namespace object
 }	// namespace gdh_engine

@@ -29,7 +29,7 @@ namespace gdh_engine {
 				if (instance_ == nullptr)
 				{
 					instance_ = 
-						new Renderer("GDH_ENGINE(VER1.0.3)", 3, 3);
+						new Renderer("GDH_ENGINE(VER1.0.4)", 3, 3);
 				}
 
 				return instance_;

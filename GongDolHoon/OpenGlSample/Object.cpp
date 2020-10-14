@@ -11,7 +11,7 @@
 
 namespace gdh_engine {
 	namespace object {
-		Object::Object(const char* vertex_path, const char* fragment_path, const char* texture_path, 
+		Object::Object(const char* vertex_path, const char* fragment_path, const char* texture_path,
 			const char* obj_path, obj_transform_t target_transform,
 			TextureType dimension, TextureType alpha)
 		{
@@ -103,6 +103,18 @@ namespace gdh_engine {
 		{
 			object_transform_->set_scale(target_scale);
 		}
+		void Object::MoveObject(glm::vec3 position)
+		{
+			object_transform_->Move(position);
+		}
+		void Object::RotateObject(glm::vec3 rotation)
+		{
+			object_transform_->Rotate(rotation);
+		}
+		void Object::ResizeObject(glm::vec3 scale)
+		{
+			object_transform_->Resize(scale);
+		}
 
 		void Object::SendProjectionAndViewMatrixToShader(glm::mat4 projection, glm::mat4 view)
 		{
@@ -118,6 +130,35 @@ namespace gdh_engine {
 			glDrawArrays(GL_TRIANGLES, 0, object_mesh_->get_num_of_vertices());
 		}
 
+		void Object::SetTextureActive()
+		{
+			object_texture_->SetActive();
+		}
+
+		void Object::SetTransformActive()
+		{
+			object_transform_->SetActive();
+		}
+
+		void Object::SetMeshActive()
+		{
+			object_mesh_->SetActive();
+		}
+
+		void Object::SetTextureUnActive()
+		{
+			object_texture_->SetUnActive();
+		}
+
+		void Object::SetTransformUnActive()
+		{
+			object_transform_->SetUnActive();
+		}
+
+		void Object::SetMeshUnActive()
+		{
+			object_mesh_->SetUnActive();
+		}
 
 	}	// namespace object
 }	// namespace gdh_engine

@@ -1,8 +1,12 @@
 #ifndef GDH_ENGINE_TRANSFORM_H
 #define GDH_ENGINE_TRANSFORM_H
 
+// library
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
+
+// custom header
+#include "IComponent.h"
 
 namespace gdh_engine {
 	namespace object {
@@ -15,7 +19,7 @@ namespace gdh_engine {
 
 		class Object;
 
-		class Transform
+		class Transform : public IComponent
 		{
 		public:
 			Transform(obj_transform_t transform_inform = { glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f) });
@@ -25,33 +29,75 @@ namespace gdh_engine {
 			void Rotate(const glm::vec3 rotation);
 			void Resize(const glm::vec3 scale);
 
+			virtual void SetActive() final;
+			virtual void SetUnActive() final;
+
+
 			void set_position(const glm::vec3 position)
 			{
-				this->obj_position_ = position;
+				if (is_transform_active_)
+				{
+					this->obj_position_ = position;
+				}
+				else
+				{
+					this->obj_position_ = glm::vec3(1.0f);
+				}
 			}
 			void set_rotation(const glm::vec3 rotation)
 			{
-				this->obj_rotation_ = rotation;
+				if (is_transform_active_)
+				{
+					this->obj_rotation_ = rotation;
+				}
+				else
+				{
+					this->obj_rotation_ = glm::vec3(0.f);
+				}
 			}
 			void set_scale(const glm::vec3 scale)
 			{
-				this->obj_scale_ = scale;
+				if (is_transform_active_)
+				{
+					this->obj_scale_ = scale;
+				}
+				else
+				{
+					this->obj_scale_ = glm::vec3(0.f);
+				}
 			}
 			void set_model_matrix(glm::mat4 model)
 			{
-				model_matrix_ = model;
+				if (is_transform_active_)
+				{
+					model_matrix_ = model;
+				}
+				else
+				{
+					model_matrix_ = glm::mat4(0.f);
+				}
 			}
-
 			glm::mat4 get_model_matrix()
 			{
-				UpdateModelMatrix();
-				return this->model_matrix_;
+				if (is_transform_active_)
+				{
+					UpdateModelMatrix();
+					return this->model_matrix_;
+				}
+				else
+				{
+					return glm::mat4(0.0f);
+				}
 			}
-			
+			bool get_is_transform_active()
+			{
+				return is_transform_active_;
+			}
 
 		private:
 			// this function called in move, rotate, resize, setter
 			void UpdateModelMatrix();
+			bool is_transform_active_;
 
 			glm::vec3 obj_origin_;
 			glm::vec3 obj_position_;

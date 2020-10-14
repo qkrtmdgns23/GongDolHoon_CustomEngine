@@ -39,6 +39,7 @@ namespace gdh_engine {
 				(texture_path, this->texture_width_, this->texture_height_, this->texture_nr_channels_, alpha_data_type);
 			}
 
+			SetActive();
 		}
 
 		Texture::Texture(const char* texture_path, TextureType type_of_texture, TextureType alpha_data_type)
@@ -75,6 +76,16 @@ namespace gdh_engine {
 				(texture_path, this->texture_width_, this->texture_height_, this->texture_nr_channels_, alpha_data_type);
 			}
 
+			SetActive();
+		}
+		void Texture::SetActive()
+		{
+			is_texture_active_ = true;
+		}
+
+		void Texture::SetUnActive()
+		{
+			is_texture_active_ = false;
 		}
 	}	// namespace object
 }	// namespace gdh_engine

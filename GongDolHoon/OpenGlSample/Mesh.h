@@ -7,12 +7,15 @@
 #include "glm/glm.hpp"
 #include "include/GLFW/glfw3.h" 
 
+// custom header
+#include "IComponent.h"
+
 namespace gdh_engine {
 	namespace object {
 		enum class AttribDataType;
 		typedef struct VertexInformation vertex_t;
 
-		class Mesh
+		class Mesh : public IComponent
 		{
 		public:
 			Mesh(std::string obj_path);
@@ -20,20 +23,48 @@ namespace gdh_engine {
 			~Mesh();
 
 			void SetUpMesh();
+			virtual void SetActive() final;
+			virtual void SetUnActive() final;
 
 			GLuint get_vertex_array_object_identity() const
 			{
-				return vertex_array_object_identity_;
+				if (is_mesh_active_)
+				{
+					return vertex_array_object_identity_;
+				}
+				else
+				{
+					return 0;
+				}
 			}
 			GLuint get_vertex_buffer_object_identity() const
 			{
-				return vertex_buffer_object_identity_;
+				if (is_mesh_active_)
+				{
+					return vertex_buffer_object_identity_;
+				}
+				else
+				{
+					return 0;
+				}
+				
 			}
 			unsigned int get_num_of_vertices() const
 			{
-				return num_of_vertices_;
+				if (is_mesh_active_)
+				{
+					return num_of_vertices_;
+				}
+				else
+				{
+					return 0;
+				}
+				
 			}
-
+			bool get_is_mesh_active() const
+			{
+				return is_mesh_active_;
+			}
 		private:
 			void GenerateAndBindVertexArrayObject();
 			void GenerateAndBindVertexBufferObject();
@@ -55,6 +86,7 @@ namespace gdh_engine {
 
 			// this is value for prevent invoke sequence violation.
 			bool is_vertex_array_object_invoke_;
+			bool is_mesh_active_;
 		};
 
 		enum class AttribDataType

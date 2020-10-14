@@ -39,14 +39,18 @@ int main(void)
     
     cube->SetObjectPosition(glm::vec3(0.f, 0.f, 0.f));
     cube->SetObjectRotation(glm::vec3(45.0f, 45.0f, 0.0f));
+
     camera->set_camera_position(glm::vec3(0.f, 0.f, 10.0f));
 
 	while (renderer->IsWindowShouldClose() == false)
 	{
 		manager::InputManager::get_instance()->ProcessInput(renderer->get_engine_window());
         renderer->ConvertCoordinatesForRender(camera, cube);
+        cube->RotateObject(glm::vec3(glfwGetTime(), 0.f, 0.f));
         renderer->Render(cube);
 	}
     renderer->ShutDown();
+    delete cube;
+
     return 0;
 }

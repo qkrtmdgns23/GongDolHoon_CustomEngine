@@ -6,20 +6,37 @@
 // library
 #include "include/GL/glew.h"	
 
+#include "IComponent.h"
+
 namespace gdh_engine {
 	namespace object {
 		enum class TextureType;
 
-		class Texture
+		class Texture : public IComponent
 		{
 		public:
 			Texture(std::string texture_path, TextureType type_of_texture, TextureType alpha_data_type);
 			Texture(const char* texture_path, TextureType type_of_texture, TextureType alpha_data_type);
 			~Texture() {}
 
+			virtual void SetActive() final;
+			virtual void SetUnActive() final;
+
+			bool get_is_texture_active()
+			{
+				return is_texture_active_;
+			}
+
 			GLuint get_texture_id() const
 			{
-				return texture_id_;
+				if(is_texture_active_)
+				{
+					return texture_id_;
+				}
+				else
+				{
+					return 0;
+				}
 			}
 
 		private:
@@ -29,6 +46,7 @@ namespace gdh_engine {
 			int texture_height_;
 			int texture_nr_channels_;
 
+			bool is_texture_active_;
 		};
 
 		enum class TextureType

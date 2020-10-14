@@ -4,10 +4,13 @@ namespace gdh_engine {
 	namespace object {
 		Camera* Camera::instance_ = nullptr;
 
-	this->world_ceiling_ = world_ceiling;
-	this->position_ = position;
-	this->right_ = glm::vec3(0.f);
-	this->up_ = world_ceiling;
+		Camera::Camera(glm::vec3 position, glm::vec3 up, float yaw, float pitch)
+			:front_(glm::vec3(0.f, 0.f, 0.f)), movement_speed_(2.5f), zoom_(45.f)
+		{
+			this->position_ = position;
+			this->up_ = up;
+			this->yaw_ = yaw;
+			this->pitch_ = pitch;
 
 			UpdateCameraVectors();
 		}

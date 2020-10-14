@@ -44,6 +44,17 @@ namespace gdh_engine {
 			void SetObjectPosition(glm::vec3 target_position);
 			void SetObjectRotation(glm::vec3 target_rotation);
 			void SetObjectScale(glm::vec3 target_scale);
+			void MoveObject(glm::vec3 position);
+			void RotateObject(glm::vec3 rotation);
+			void ResizeObject(glm::vec3 scale);
+
+			// About Component Active
+			void SetTextureActive();
+			void SetTransformActive();
+			void SetMeshActive();
+			void SetTextureUnActive();
+			void SetTransformUnActive();
+			void SetMeshUnActive();
 
 		private:
 			Texture* object_texture_;

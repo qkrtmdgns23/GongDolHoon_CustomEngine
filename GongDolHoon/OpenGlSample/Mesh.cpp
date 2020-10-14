@@ -19,7 +19,7 @@ namespace gdh_engine {
 				vertex_array_[i].normal = normals_[i];
 				vertex_array_[i].texture_coordinate = uvs_[i];
 			}
-
+			SetActive();
 		}
 		Mesh::Mesh(const char* obj_path)
 		{
@@ -33,7 +33,7 @@ namespace gdh_engine {
 				vertex_array_[i].normal = normals_[i];
 				vertex_array_[i].texture_coordinate = uvs_[i];
 			}
-
+			SetActive();
 		}
 		Mesh::~Mesh()
 		{
@@ -77,14 +77,6 @@ namespace gdh_engine {
 			}
 		}
 
-		//void Mesh::EnableFloatTypeVertexAttribArray(const int location, const int vertex_attrib_size,
-		//	const int stride, const int offset, AttribDataType data_type, bool is_normalization)
-		//{
-		//	glVertexAttribPointer(location, vertex_attrib_size, (int)data_type, is_normalization,
-		//		stride * sizeof(float), (void*)(offset * sizeof(float)));
-		//	glEnableVertexAttribArray(location);
-		//}
-
 		void Mesh::UnbindVertexBufferObject()
 		{
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -93,6 +85,16 @@ namespace gdh_engine {
 		void Mesh::UnbindVertexArrayObject()
 		{
 			glBindVertexArray(0);
+		}
+
+		void Mesh::SetActive()
+		{
+			is_mesh_active_ = true;
+		}
+
+		void Mesh::SetUnActive()
+		{
+			is_mesh_active_ = false;
 		}
 
 	} // namespace object
