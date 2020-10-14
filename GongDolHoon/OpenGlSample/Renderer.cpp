@@ -2,6 +2,7 @@
 
 // library
 #include "include/GL/glew.h"	
+#include "glm/gtc/matrix_transform.hpp"
 
 // custom header
 #include "renderer.h"
@@ -71,6 +72,15 @@ namespace gdh_engine {
 			{
 				return false;
 			}
+		}
+
+		void Renderer::ConvertCoordinatesForRender(object::Camera* camera, object::Object* target_object)
+		{
+			projection_matrix_ = glm::perspective(glm::radians(camera->get_zoom()), 
+				(float)1024 / 728, 0.1f, 100.0f);
+			view_matrix_ = camera->get_view_matrix();
+
+			target_object->SendProjectionAndViewMatrixToShader(projection_matrix_, view_matrix_);
 		}
 
 		void Renderer::Render(object::Object* target_obj)

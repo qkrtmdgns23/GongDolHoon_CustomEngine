@@ -3,7 +3,9 @@
 
 #include "include/GLFW/glfw3.h" 
 
+// custom header
 #include "object.h"
+#include "camera.h"
 
 namespace gdh_engine {
 	namespace manager {
@@ -33,6 +35,7 @@ namespace gdh_engine {
 				return instance_;
 			}
 
+			void ConvertCoordinatesForRender(object::Camera* camera, object::Object* target_object);
 			void Render(object::Object* target_obj);
 
 			// it's callback function in openGL
@@ -48,10 +51,13 @@ namespace gdh_engine {
 				const unsigned int kWindowHeight = 724, const unsigned int kWindowWidth = 1028);
 			~Renderer() {}
 
+			static Renderer* instance_;
+
 			size_t window_width_;
 			size_t window_height_;
 
-			static Renderer* instance_;
+			glm::mat4 projection_matrix_;
+			glm::mat4 view_matrix_;
 
 			std::string engine_window_title_;
 

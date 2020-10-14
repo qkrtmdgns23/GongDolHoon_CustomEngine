@@ -37,6 +37,7 @@ namespace gdh_engine {
 			void SetTextureUniformToShader(const char* tex_uniform_name, unsigned int tex_num);
 			void ActiveTextureRendering();
 			void Render();
+			void SendProjectionAndViewMatrixToShader(glm::mat4 projection, glm::mat4 view);
 
 			// About Transform
 			void SetObjectTransform(obj_transform_t target_transform);

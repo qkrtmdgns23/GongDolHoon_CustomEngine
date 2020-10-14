@@ -1,5 +1,5 @@
-#ifndef TRANSFORM_H
-#define TRANSFORM_H
+#ifndef GDH_ENGINE_TRANSFORM_H
+#define GDH_ENGINE_TRANSFORM_H
 
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
@@ -63,4 +63,4 @@ namespace gdh_engine {
 	} // namespace object
 } // namespace gdh_engine
 
-#endif /* TRANSFORM_H */
+#endif // GDH_ENGINE_TRANSFORM_H

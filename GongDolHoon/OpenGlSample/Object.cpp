@@ -104,26 +104,20 @@ namespace gdh_engine {
 			object_transform_->set_scale(target_scale);
 		}
 
+		void Object::SendProjectionAndViewMatrixToShader(glm::mat4 projection, glm::mat4 view)
+		{
+			object_shader_->SetMatrix4TypeUniformVariable("projection", projection);
+			object_shader_->SetMatrix4TypeUniformVariable("view", view);
+		}
+
 		void Object::Render()
 		{
-			object_view_matrix_ = glm::mat4(1.f);
-			object_projection_matrix_ = glm::mat4(1.f);
-
-			object_shader_->UseShader();
-
-			//object_transform_->set_rotation(glm::vec3(90.f, 45.f, 0.f));
-			//object_transform_->set_position(glm::vec3(3.0f, 1.0f, 1.0f));
-			//object_transform_->set_scale(glm::vec3(5.f, 1.f, 1.f));
-			object_view_matrix_ = glm::translate(object_view_matrix_, glm::vec3(0.f, 0.f, -10.f));
-			object_projection_matrix_ = glm::perspective(glm::radians(45.0f), 
-				(float)1028/724, 0.1f, 100.f);
 			object_shader_->SetMatrix4TypeUniformVariable("model", object_transform_->get_model_matrix());
-			object_shader_->SetMatrix4TypeUniformVariable("view", object_view_matrix_);
-			object_shader_->SetMatrix4TypeUniformVariable("projection", object_projection_matrix_);
 
 			glBindVertexArray(object_mesh_->get_vertex_array_object_identity());
 			glDrawArrays(GL_TRIANGLES, 0, object_mesh_->get_num_of_vertices());
 		}
+
 
 	}	// namespace object
 }	// namespace gdh_engine
