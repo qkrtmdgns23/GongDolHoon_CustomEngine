@@ -12,14 +12,23 @@ namespace gdh_engine {
 		class Texture;
 		class Shader;
 		class Mesh;
+		class Transform;
 		enum class TextureType;
+
+		typedef struct ObjectTransformInformation obj_transform_t;
 
 		class Object
 		{
 		public:
 			Object(const char* vertex_path, const char* fragment_path, const char* texture_path, 
-				const char* obj_path, TextureType dimension, TextureType alpha);
+				const char* obj_path, obj_transform_t target_transform, 
+				TextureType dimension, TextureType alpha);
 			Object(std::string vertex_path, std::string fragment_path, std::string texture_path,
+				const char* obj_path, obj_transform_t target_transform,
+				TextureType dimension, TextureType alpha);
+			Object(const char* vertex_path, const char* fragment_path, const char* texture_path,
+				const char* obj_path, TextureType dimension, TextureType alpha);
+			Object(std::string vertex_path, const char* fragment_path, const char* texture_path,
 				const char* obj_path, TextureType dimension, TextureType alpha);
 			~Object();
 
@@ -29,12 +38,18 @@ namespace gdh_engine {
 			void ActiveTextureRendering();
 			void Render();
 
+			// About Transform
+			void SetObjectTransform(obj_transform_t target_transform);
+			void SetObjectPosition(glm::vec3 target_position);
+			void SetObjectRotation(glm::vec3 target_rotation);
+			void SetObjectScale(glm::vec3 target_scale);
+
 		private:
 			Texture* object_texture_;
 			Shader* object_shader_;
 			Mesh* object_mesh_;
-			
-			glm::mat4 object_model_matrix_;
+			Transform* object_transform_;
+
 			glm::mat4 object_view_matrix_;
 			glm::mat4 object_projection_matrix_;
 		};

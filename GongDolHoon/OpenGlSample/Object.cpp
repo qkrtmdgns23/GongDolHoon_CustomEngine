@@ -7,29 +7,57 @@
 #include "mesh.h"
 #include "texture.h"
 #include "renderer.h"
+#include "transform.h"
 
 namespace gdh_engine {
 	namespace object {
 		Object::Object(const char* vertex_path, const char* fragment_path, const char* texture_path, 
-			const char* obj_path, TextureType dimension, TextureType alpha)
+			const char* obj_path, obj_transform_t target_transform,
+			TextureType dimension, TextureType alpha)
 		{
 			object_shader_ = new Shader(vertex_path, fragment_path);
 			object_texture_ = new Texture(texture_path, dimension, alpha);
 			object_mesh_ = new Mesh(obj_path);
+			object_transform_ = new Transform(target_transform);
 
 			object_mesh_->SetUpMesh();
 			SetTextureUniformToShader("texture1", 0);
 		}
 		Object::Object(std::string vertex_path, std::string fragment_path, std::string texture_path,
+			const char* obj_path, obj_transform_t target_transform,
+			TextureType dimension, TextureType alpha)
+		{
+			object_shader_ = new Shader(vertex_path, fragment_path);
+			object_texture_ = new Texture(texture_path, dimension, alpha);
+			object_mesh_ = new Mesh(obj_path);
+			object_transform_ = new Transform(target_transform);
+
+			object_mesh_->SetUpMesh();
+			SetTextureUniformToShader("texture1", 0);
+		}
+		Object::Object(const char* vertex_path, const char* fragment_path, const char* texture_path,
 			const char* obj_path, TextureType dimension, TextureType alpha)
 		{
 			object_shader_ = new Shader(vertex_path, fragment_path);
 			object_texture_ = new Texture(texture_path, dimension, alpha);
 			object_mesh_ = new Mesh(obj_path);
+			object_transform_ = new Transform();
 
 			object_mesh_->SetUpMesh();
 			SetTextureUniformToShader("texture1", 0);
 		}
+		Object::Object(std::string vertex_path, const char* fragment_path, const char* texture_path,
+			const char* obj_path, TextureType dimension, TextureType alpha)
+		{
+			object_shader_ = new Shader(vertex_path, fragment_path);
+			object_texture_ = new Texture(texture_path, dimension, alpha);
+			object_mesh_ = new Mesh(obj_path);
+			object_transform_ = new Transform();
+
+			object_mesh_->SetUpMesh();
+			SetTextureUniformToShader("texture1", 0);
+		}
+
 		Object::~Object()
 		{
 			delete object_shader_;
@@ -56,19 +84,40 @@ namespace gdh_engine {
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_2D, object_texture_->get_texture_id());
 		}
+
+		void Object::SetObjectTransform(obj_transform_t target_transform)
+		{
+			object_transform_->set_position(target_transform.position);
+			object_transform_->set_rotation(target_transform.rotation);
+			object_transform_->set_scale(target_transform.scale);
+		}
+		void Object::SetObjectPosition(glm::vec3 target_position)
+		{
+			object_transform_->set_position(target_position);
+		}
+		void Object::SetObjectRotation(glm::vec3 target_rotation)
+		{
+			object_transform_->set_rotation(target_rotation);
+		}
+		void Object::SetObjectScale(glm::vec3 target_scale)
+		{
+			object_transform_->set_scale(target_scale);
+		}
+
 		void Object::Render()
 		{
-			object_model_matrix_ = glm::mat4(1.f);
 			object_view_matrix_ = glm::mat4(1.f);
 			object_projection_matrix_ = glm::mat4(1.f);
 
 			object_shader_->UseShader();
 
-			object_model_matrix_ = glm::rotate(object_model_matrix_, (float)glfwGetTime(), glm::vec3(0.5f, 1.f, 0.f));
+			//object_transform_->set_rotation(glm::vec3(90.f, 45.f, 0.f));
+			//object_transform_->set_position(glm::vec3(3.0f, 1.0f, 1.0f));
+			//object_transform_->set_scale(glm::vec3(5.f, 1.f, 1.f));
 			object_view_matrix_ = glm::translate(object_view_matrix_, glm::vec3(0.f, 0.f, -10.f));
 			object_projection_matrix_ = glm::perspective(glm::radians(45.0f), 
 				(float)1028/724, 0.1f, 100.f);
-			object_shader_->SetMatrix4TypeUniformVariable("model", object_model_matrix_);
+			object_shader_->SetMatrix4TypeUniformVariable("model", object_transform_->get_model_matrix());
 			object_shader_->SetMatrix4TypeUniformVariable("view", object_view_matrix_);
 			object_shader_->SetMatrix4TypeUniformVariable("projection", object_projection_matrix_);
 

@@ -765,9 +765,6 @@
     <ClInclude Include="glm\gtx\wrap.hpp">
       <Filter>리소스 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Transform.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -790,6 +787,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="object.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="transform.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -1201,9 +1201,6 @@
     <ClCompile Include="main.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Transform.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -1226,6 +1223,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="object.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="transform.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

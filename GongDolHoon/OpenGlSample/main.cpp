@@ -34,7 +34,10 @@ int main(void)
     manager::Renderer* renderer = manager::Renderer::get_instance();
     object::Object* cube = new object::Object("resource/shaders/cube_vs.glsl", "resource/shaders/cube_fs.glsl", "resource/jpg/container.jpg", 
         "resource/obj/cube.obj",object::TextureType::k2DimensionalTexture, object::TextureType::kRGBTexture);
-
+    
+    cube->SetObjectPosition(glm::vec3(0.f, 0.f, 0.f));
+    cube->SetObjectRotation(glm::vec3(45.0f, 45.0f, 0.0f));
+    
 	while (renderer->IsWindowShouldClose() == false)
 	{
 		manager::InputManager::get_instance()->ProcessInput(renderer->get_engine_window());
