@@ -13,14 +13,14 @@ namespace gdh_engine {
 
 			glGenTextures(1, &texture_id_);
 
-			if (type_of_texture == TextureType::k2DTexture)
+			if (type_of_texture == TextureType::k2DimensionalTexture)
 			{
 				glBindTexture(GL_TEXTURE_2D, texture_id_);
 				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 			}
-			else if (type_of_texture == TextureType::k3DTexture)
+			else if (type_of_texture == TextureType::k3DimensionalTexture)
 			{
 				glBindTexture(GL_TEXTURE_2D, texture_id_);
 				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -28,12 +28,12 @@ namespace gdh_engine {
 				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 			}
 
-			if (type_of_texture == TextureType::k2DTexture)
+			if (type_of_texture == TextureType::k2DimensionalTexture)
 			{
 				gdh_engine::manager::file::FileManager::get_instance()->LoadTexture2D
 				(texture_path, this->texture_width_, this->texture_height_, this->texture_nr_channels_, alpha_data_type);
 			}
-			else if (type_of_texture == TextureType::k3DTexture)
+			else if (type_of_texture == TextureType::k3DimensionalTexture)
 			{
 				gdh_engine::manager::file::FileManager::get_instance()->LoadTexture2D
 				(texture_path, this->texture_width_, this->texture_height_, this->texture_nr_channels_, alpha_data_type);
@@ -49,14 +49,14 @@ namespace gdh_engine {
 
 			glGenTextures(1, &texture_id_);
 
-			if (type_of_texture == TextureType::k2DTexture)
+			if (type_of_texture == TextureType::k2DimensionalTexture)
 			{
 				glBindTexture(GL_TEXTURE_2D, texture_id_);
 				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 			}
-			else if (type_of_texture == TextureType::k3DTexture)
+			else if (type_of_texture == TextureType::k3DimensionalTexture)
 			{
 				glBindTexture(GL_TEXTURE_2D, texture_id_);
 				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -64,12 +64,12 @@ namespace gdh_engine {
 				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 			}
 
-			if (type_of_texture == TextureType::k2DTexture)
+			if (type_of_texture == TextureType::k2DimensionalTexture)
 			{
 				gdh_engine::manager::file::FileManager::get_instance()->LoadTexture2D
 				(texture_path, this->texture_width_, this->texture_height_, this->texture_nr_channels_, alpha_data_type);
 			}
-			else if (type_of_texture == TextureType::k3DTexture)
+			else if (type_of_texture == TextureType::k3DimensionalTexture)
 			{
 				gdh_engine::manager::file::FileManager::get_instance()->LoadTexture2D
 				(texture_path, this->texture_width_, this->texture_height_, this->texture_nr_channels_, alpha_data_type);

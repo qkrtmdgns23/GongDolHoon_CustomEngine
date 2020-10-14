@@ -8,6 +8,8 @@
 
 namespace gdh_engine {
 	namespace manager {
+		Renderer* Renderer::instance_ = nullptr;
+		
 		Renderer::Renderer(const char* title, const unsigned int kMajorVersion, const unsigned int kMinorVersion,
 			const unsigned int kWindowHeight, const unsigned int kWindowWidth)
 			: kGlfwContextMajorVersion(kMajorVersion), kGlfwContextMinorVersion(kMinorVersion)
@@ -15,6 +17,7 @@ namespace gdh_engine {
 			this->engine_window_title_ = title;
 			this->window_height_ = kWindowHeight;
 			this->window_width_ = kWindowWidth;
+			this->engine_window_ = nullptr;
 
 			glfwInit();
 			glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, kGlfwContextMajorVersion);
@@ -41,40 +44,7 @@ namespace gdh_engine {
 			glEnable(GL_DEPTH_TEST);
 		}
 
-		Renderer::Renderer(std::string title, const unsigned int kMajorVersion, const unsigned int kMinorVersion,
-			const unsigned int kWindowHeight, const unsigned int kWindowWidth)
-			: kGlfwContextMajorVersion(kMajorVersion), kGlfwContextMinorVersion(kMinorVersion)
-		{
-			this->engine_window_title_ = title;
-			this->window_height_ = kWindowHeight;
-			this->window_width_ = kWindowWidth;
-
-			glfwInit();
-			glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, kGlfwContextMajorVersion);
-			glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, kGlfwContextMinorVersion);
-			glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-			engine_window_ = glfwCreateWindow(window_width_, window_height_, engine_window_title_.c_str(), NULL, NULL);
-			if (engine_window_ == NULL)
-			{
-				fprintf(stderr, "Failed to Create Glfw Window.\n");
-				glfwTerminate();
-			}
-
-			glfwMakeContextCurrent(engine_window_);
-			glfwSetFramebufferSizeCallback(engine_window_, ResizeWindowFrameBuffer);
-
-			glewExperimental = true; // Needed for core profile
-
-			if (glewInit() != GLEW_OK) {
-				fprintf(stderr, "Failed to initialize GLEW\n");
-				glfwTerminate();
-			}
-
-			glEnable(GL_DEPTH_TEST);
-		}
-
-		Renderer::~Renderer()
+		void Renderer::ShutDown()
 		{
 			glfwTerminate();
 		}
@@ -101,6 +71,14 @@ namespace gdh_engine {
 			{
 				return false;
 			}
+		}
+
+		void Renderer::Render(object::Object* target_obj)
+		{
+			ClearWindowToRender();
+			target_obj->ActiveTextureRendering();
+			target_obj->Render();
+			SwapBuffearsOnWindow();
 		}
 
 		void Renderer::ResizeWindowFrameBuffer(GLFWwindow* window, int fbw, int fbh)

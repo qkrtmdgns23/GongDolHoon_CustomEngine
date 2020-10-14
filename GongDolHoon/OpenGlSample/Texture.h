@@ -33,10 +33,10 @@ namespace gdh_engine {
 
 		enum class TextureType
 		{
-			k2DTexture = 0,
-			k3DTexture,
-			kRGB,
-			kRGBA,
+			k2DimensionalTexture = 0,
+			k3DimensionalTexture,
+			kRGBTexture,
+			kRGBATexture,
 		};
 
 	} // namespace object

@@ -378,13 +378,13 @@ namespace gdh_engine {
 			{
 				unsigned char* data = stbi_load(texture_path, &texture_width, &texture_height, &texture_nr_channels, 0);
 				stbi_set_flip_vertically_on_load(true);
-				if (data && alpha_data_type == object::TextureType::kRGB)
+				if (data && alpha_data_type == object::TextureType::kRGBTexture)
 				{
 					glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, texture_width, texture_height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 					glGenerateMipmap(GL_TEXTURE_2D);
 					std::cout << "Load Succeed: " << texture_path << std::endl;
 				}
-				else if (data && alpha_data_type == object::TextureType::kRGBA)
+				else if (data && alpha_data_type == object::TextureType::kRGBATexture)
 				{
 					glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, texture_width, texture_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 					glGenerateMipmap(GL_TEXTURE_2D);
@@ -401,13 +401,13 @@ namespace gdh_engine {
 			{
 				unsigned char* data = stbi_load(texture_path.c_str(), &texture_width, &texture_height, &texture_nr_channels, 0);
 				stbi_set_flip_vertically_on_load(true);
-				if (data && alpha_data_type == object::TextureType::kRGB)
+				if (data && alpha_data_type == object::TextureType::kRGBTexture)
 				{
 					glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, texture_width, texture_height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 					glGenerateMipmap(GL_TEXTURE_2D);
 					std::cout << "Load Succeed: " << texture_path << std::endl;
 				}
-				else if (data && alpha_data_type == object::TextureType::kRGBA)
+				else if (data && alpha_data_type == object::TextureType::kRGBATexture)
 				{
 					glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, texture_width, texture_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 					glGenerateMipmap(GL_TEXTURE_2D);

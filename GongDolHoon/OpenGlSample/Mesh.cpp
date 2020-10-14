@@ -21,6 +21,20 @@ namespace gdh_engine {
 			}
 
 		}
+		Mesh::Mesh(const char* obj_path)
+		{
+			unsigned int* get_num_of_vertices = &num_of_vertices_;
+			manager::file::FileManager::get_instance()->Load3DModelFromObj(obj_path, vertices_, uvs_, normals_, get_num_of_vertices);
+			is_vertex_array_object_invoke_ = false;
+			this->vertex_array_ = new VertexInformation[this->num_of_vertices_];
+			for (size_t i = 0; i < num_of_vertices_; ++i)
+			{
+				vertex_array_[i].position = vertices_[i];
+				vertex_array_[i].normal = normals_[i];
+				vertex_array_[i].texture_coordinate = uvs_[i];
+			}
+
+		}
 		Mesh::~Mesh()
 		{
 			glDeleteVertexArrays(1, &vertex_array_object_identity_);

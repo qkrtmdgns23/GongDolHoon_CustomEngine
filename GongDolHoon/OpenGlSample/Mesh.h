@@ -16,6 +16,7 @@ namespace gdh_engine {
 		{
 		public:
 			Mesh(std::string obj_path);
+			Mesh(const char* obj_path);
 			~Mesh();
 
 			void SetUpMesh();
@@ -27,6 +28,10 @@ namespace gdh_engine {
 			GLuint get_vertex_buffer_object_identity() const
 			{
 				return vertex_buffer_object_identity_;
+			}
+			unsigned int get_num_of_vertices() const
+			{
+				return num_of_vertices_;
 			}
 
 		private:
