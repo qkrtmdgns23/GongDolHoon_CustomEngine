@@ -29,10 +29,13 @@ using namespace gdh_engine;
 
 const int kScreenWidth = 1028;
 const int kScreenHeight = 724;
+const int kOpenGLMajorVersion = 3;
+const int kOpenGLMinorVersion = 3;
 
 int main(void)
 {
-	manager::Renderer* gdh_renderer = new manager::Renderer("GongDolHoon_CustomEngine", 3, 3, kScreenHeight, kScreenWidth);
+	manager::Renderer* gdh_renderer = new manager::Renderer
+        ("GongDolHoon_CustomEngine", kOpenGLMajorVersion, kOpenGLMinorVersion, kScreenHeight, kScreenWidth);
     object::Shader* triangle_shader = 
         new object::Shader("resource/shaders/triangle_vs.glsl", "resource/shaders/triangle_fs.glsl");
     object::Mesh* temp_mesh = new object::Mesh("resource/obj/cube.obj");
@@ -60,7 +63,7 @@ int main(void)
         glm::mat4 projection = glm::mat4(1.0f);
 
         model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(0.5f, 1.f, 0.f));
-        view = glm::translate(view, glm::vec3(0.f, 0.f, -3.f));
+        view = glm::translate(view, glm::vec3(0.f, 0.f, -10.f));
         projection = glm::perspective(glm::radians(45.0f), (float)kScreenWidth/kScreenHeight, 0.1f, 100.f);
 
         triangle_shader->SetMatrix4TypeUniformVariable("model", model);

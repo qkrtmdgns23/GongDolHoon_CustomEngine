@@ -10,6 +10,7 @@
 namespace gdh_engine {
 	namespace object {
 		enum class AttribDataType;
+		typedef struct VertexInformation vertex_t;
 
 		class Mesh
 		{
@@ -31,9 +32,9 @@ namespace gdh_engine {
 		private:
 			void GenerateAndBindVertexArrayObject();
 			void GenerateAndBindVertexBufferObject();
-			void EnableFloatTypeVertexAttribArray(const int location,
-				const int vertex_attrib_size, const int stride, const int offset,
-				AttribDataType data_type, bool is_normalization);
+			//void EnableFloatTypeVertexAttribArray(const int location,
+			//	const int vertex_attrib_size, const int stride, const int offset,
+			//	AttribDataType data_type, bool is_normalization);
 			void UnbindVertexBufferObject();
 			void UnbindVertexArrayObject();
 
@@ -43,6 +44,9 @@ namespace gdh_engine {
 			std::vector<glm::vec3> vertices_;
 			std::vector<glm::vec3> normals_;
 			std::vector<glm::vec2> uvs_;
+
+			vertex_t* vertex_array_;
+			unsigned int num_of_vertices_;
 
 			// this is value for prevent invoke sequence violation.
 			bool is_vertex_array_object_invoke_;
@@ -62,6 +66,13 @@ namespace gdh_engine {
 			kGdh4Bytes = GL_4_BYTES,
 			kGdhDouble = GL_DOUBLE,
 		};
+
+		typedef struct VertexInformation
+		{
+			glm::vec3 position;
+			glm::vec2 texture_coordinate;
+			glm::vec3 normal;
+		}vertex_t;
 	} // namespace object
 } // namespace gdh_engine
 

@@ -9,9 +9,17 @@ namespace gdh_engine {
 	namespace object {
 		Mesh::Mesh(std::string obj_path)
 		{
-			manager::file::FileManager::get_instance()->Load3DModelFromObj(obj_path, vertices_, uvs_,normals_);
-
+			unsigned int *get_num_of_vertices = &num_of_vertices_;
+			manager::file::FileManager::get_instance()->Load3DModelFromObj(obj_path, vertices_, uvs_,normals_, get_num_of_vertices);
 			is_vertex_array_object_invoke_ = false;
+			this->vertex_array_ = new VertexInformation[this->num_of_vertices_];
+			for (size_t i = 0; i < num_of_vertices_; ++i)
+			{
+				vertex_array_[i].position = vertices_[i];
+				vertex_array_[i].normal = normals_[i];
+				vertex_array_[i].texture_coordinate = uvs_[i];
+			}
+
 		}
 		Mesh::~Mesh()
 		{
@@ -23,8 +31,13 @@ namespace gdh_engine {
 		{
 			GenerateAndBindVertexArrayObject();
 			GenerateAndBindVertexBufferObject();
-			EnableFloatTypeVertexAttribArray(0, 3, 8, 0, object::AttribDataType::kGdhFloat, false);
-			EnableFloatTypeVertexAttribArray(1, 2, 8, 3, object::AttribDataType::kGdhFloat, false);
+
+			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(vertex_t), (GLvoid*)offsetof(vertex_t, position));
+			glEnableVertexAttribArray(0);
+			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(vertex_t), (GLvoid*)offsetof(vertex_t, texture_coordinate));
+			glEnableVertexAttribArray(1);
+			glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(vertex_t), (GLvoid*)offsetof(vertex_t, normal));
+
 			UnbindVertexBufferObject();
 			UnbindVertexArrayObject();
 		}
@@ -42,9 +55,7 @@ namespace gdh_engine {
 			{
 				glGenBuffers(1, &vertex_buffer_object_identity_);
 				glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer_object_identity_);
-				glBufferData(GL_ARRAY_BUFFER, vertices_.size() * sizeof(glm::vec3), &vertices_[0], GL_STATIC_DRAW);
-				glBufferData(GL_ARRAY_BUFFER, uvs_.size() * sizeof(glm::vec2), &uvs_[0], GL_STATIC_DRAW);
-				glBufferData(GL_ARRAY_BUFFER, normals_.size() * sizeof(glm::vec3), &normals_[0], GL_STATIC_DRAW);
+				glBufferData(GL_ARRAY_BUFFER, this->num_of_vertices_ * sizeof(vertex_t), this->vertex_array_, GL_STATIC_DRAW);
 			}
 			else
 			{
@@ -52,13 +63,13 @@ namespace gdh_engine {
 			}
 		}
 
-		void Mesh::EnableFloatTypeVertexAttribArray(const int location, const int vertex_attrib_size,
-			const int stride, const int offset, AttribDataType data_type, bool is_normalization)
-		{
-			glVertexAttribPointer(location, vertex_attrib_size, (int)data_type, is_normalization,
-				stride * sizeof(float), (void*)(offset * sizeof(float)));
-			glEnableVertexAttribArray(location);
-		}
+		//void Mesh::EnableFloatTypeVertexAttribArray(const int location, const int vertex_attrib_size,
+		//	const int stride, const int offset, AttribDataType data_type, bool is_normalization)
+		//{
+		//	glVertexAttribPointer(location, vertex_attrib_size, (int)data_type, is_normalization,
+		//		stride * sizeof(float), (void*)(offset * sizeof(float)));
+		//	glEnableVertexAttribArray(location);
+		//}
 
 		void Mesh::UnbindVertexBufferObject()
 		{

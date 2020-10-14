@@ -183,7 +183,7 @@ namespace gdh_engine {
 				return program_id;
 			}
 			GLuint FileManager::Load3DModelFromObj(const char* obj_path,
-				std::vector<glm::vec3>& out_vertices, std::vector<glm::vec2>& out_uvs, std::vector<glm::vec3>& out_normals)
+				std::vector<glm::vec3>& out_vertices, std::vector<glm::vec2>& out_uvs, std::vector<glm::vec3>& out_normals, unsigned int* num_of_vertices)
 			{
 				printf("GONG_DOL_HOON_CUSTOM_ENGINE [OBJ_LOADING]: %s\n", obj_path);
 
@@ -253,6 +253,8 @@ namespace gdh_engine {
 
 				}
 
+				*num_of_vertices = vertex_indices.size();
+
 				// For each vertex of each triangle
 				for (unsigned int i = 0; i < vertex_indices.size(); i++) {
 
@@ -276,7 +278,7 @@ namespace gdh_engine {
 				return true;
 			}
 			GLuint FileManager::Load3DModelFromObj(std::string obj_path,
-				std::vector<glm::vec3>& out_vertices, std::vector<glm::vec2>& out_uvs, std::vector<glm::vec3>& out_normals)
+				std::vector<glm::vec3>& out_vertices, std::vector<glm::vec2>& out_uvs, std::vector<glm::vec3>& out_normals, unsigned int* num_of_vertices)
 			{
 				printf("GONG_DOL_HOON_CUSTOM_ENGINE [OBJ_LOADING]: %s\n", obj_path.c_str());
 
@@ -346,6 +348,8 @@ namespace gdh_engine {
 
 				}
 
+				*num_of_vertices = vertex_indices.size();
+
 				// For each vertex of each triangle
 				for (unsigned int i = 0; i < vertex_indices.size(); i++) {
 
@@ -358,7 +362,7 @@ namespace gdh_engine {
 					glm::vec3 vertex = temp_sphere_vertices[_vertex_index - 1];
 					glm::vec2 uv = temp_sphere_uvs[_uv_index - 1];
 					glm::vec3 normal = temp_sphere_normals[_normal_index - 1];
-
+					
 					// Put the attributes in buffers
 					out_vertices.push_back(vertex);
 					out_uvs.push_back(uv);
