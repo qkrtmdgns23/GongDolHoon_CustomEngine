@@ -22,14 +22,14 @@ namespace gdh_engine {
 		public:
 			Object(const char* vertex_path, const char* fragment_path, const char* texture_path, 
 				const char* obj_path, obj_transform_t target_transform, 
-				TextureType dimension, TextureType alpha);
+				TextureType dimensional_inform, TextureType alpha);
 			Object(std::string vertex_path, std::string fragment_path, std::string texture_path,
 				const char* obj_path, obj_transform_t target_transform,
-				TextureType dimension, TextureType alpha);
+				TextureType dimensional_inform, TextureType alpha);
 			Object(const char* vertex_path, const char* fragment_path, const char* texture_path,
-				const char* obj_path, TextureType dimension, TextureType alpha);
+				const char* obj_path, TextureType dimensional_inform, TextureType alpha);
 			Object(std::string vertex_path, const char* fragment_path, const char* texture_path,
-				const char* obj_path, TextureType dimension, TextureType alpha);
+				const char* obj_path, TextureType dimensional_inform, TextureType alpha);
 			~Object();
 
 			void SetupMesh();
