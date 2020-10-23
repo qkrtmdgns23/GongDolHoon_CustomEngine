@@ -6,13 +6,13 @@
 // library
 #include "include/GL/glew.h"	
 
-#include "IComponent.h"
+#include "interface_component.h"
 
 namespace gdh_engine {
 	namespace object {
 		enum class TextureType;
 
-		class Texture : public IComponent
+		class Texture : public InterfaceComponent
 		{
 		public:
 			Texture(std::string texture_path, TextureType type_of_texture, TextureType alpha_data_type);

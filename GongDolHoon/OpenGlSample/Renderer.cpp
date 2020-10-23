@@ -74,7 +74,7 @@ namespace gdh_engine {
 			}
 		}
 
-		void Renderer::ConvertCoordinatesForRender(object::Camera* camera, object::Object* target_object)
+		void Renderer::ConvertCoordinatesForRender(object::Camera* camera, object::VisibleObject* target_object)
 		{
 			projection_matrix_ = glm::perspective(glm::radians(camera->get_zoom()), 
 				(float)1024 / 728, 0.1f, 100.0f);
@@ -83,7 +83,7 @@ namespace gdh_engine {
 			target_object->SendProjectionAndViewMatrixToShader(projection_matrix_, view_matrix_);
 		}
 
-		void Renderer::Render(object::Object* target_obj)
+		void Renderer::Render(object::VisibleObject* target_obj)
 		{
 			ClearWindowToRender();
 			target_obj->ActiveTextureRendering();

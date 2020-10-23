@@ -8,14 +8,14 @@
 #include "include/GLFW/glfw3.h" 
 
 // custom header
-#include "IComponent.h"
+#include "interface_component.h"
 
 namespace gdh_engine {
 	namespace object {
 		enum class AttribDataType;
-		typedef struct VertexInformation vertex_t;
+		typedef struct VertexInformation Vertex;
 
-		class Mesh : public IComponent
+		class Mesh : public InterfaceComponent
 		{
 		public:
 			Mesh(std::string obj_path);
@@ -81,7 +81,7 @@ namespace gdh_engine {
 			std::vector<glm::vec3> normals_;
 			std::vector<glm::vec2> uvs_;
 
-			vertex_t* vertex_array_;
+			Vertex* vertex_array_;
 			unsigned int num_of_vertices_;
 
 			// this is value for prevent invoke sequence violation.
@@ -109,7 +109,7 @@ namespace gdh_engine {
 			glm::vec3 position;
 			glm::vec2 texture_coordinate;
 			glm::vec3 normal;
-		}vertex_t;
+		}Vertex;
 	} // namespace object
 } // namespace gdh_engine
 

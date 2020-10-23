@@ -1,9 +1,9 @@
 #include "Transform.h"
-#include "object.h"
+#include "visible_object.h"
 
 namespace gdh_engine {
 	namespace object {
-		Transform::Transform(obj_transform_t transform_inform)
+		Transform::Transform(ObjTransformInform transform_inform)
 		{
 			this->obj_origin_ = glm::vec3(0.0);
 			this->obj_position_ = transform_inform.position;

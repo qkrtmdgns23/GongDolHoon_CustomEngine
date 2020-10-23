@@ -5,7 +5,8 @@
 #include "renderer.h"
 #include "texture.h"
 #include "input_manager.h"
-#include "object.h"
+#include "visible_object.h"
+#include "invisible_object.h"
 #include "sphere.h"
 #include "camera.h"
 

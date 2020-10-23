@@ -46,11 +46,11 @@ namespace gdh_engine {
 			GenerateAndBindVertexArrayObject();
 			GenerateAndBindVertexBufferObject();
 
-			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(vertex_t), (GLvoid*)offsetof(vertex_t, position));
+			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, position));
 			glEnableVertexAttribArray(0);
-			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(vertex_t), (GLvoid*)offsetof(vertex_t, texture_coordinate));
+			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, texture_coordinate));
 			glEnableVertexAttribArray(1);
-			glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(vertex_t), (GLvoid*)offsetof(vertex_t, normal));
+			glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, normal));
 
 			UnbindVertexBufferObject();
 			UnbindVertexArrayObject();
@@ -69,7 +69,7 @@ namespace gdh_engine {
 			{
 				glGenBuffers(1, &vertex_buffer_object_identity_);
 				glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer_object_identity_);
-				glBufferData(GL_ARRAY_BUFFER, this->num_of_vertices_ * sizeof(vertex_t), this->vertex_array_, GL_STATIC_DRAW);
+				glBufferData(GL_ARRAY_BUFFER, this->num_of_vertices_ * sizeof(Vertex), this->vertex_array_, GL_STATIC_DRAW);
 			}
 			else
 			{

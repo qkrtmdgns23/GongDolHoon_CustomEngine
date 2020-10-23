@@ -4,13 +4,11 @@
 #include "include/GLFW/glfw3.h" 
 
 // custom header
-#include "object.h"
+#include "visible_object.h"
 #include "camera.h"
 
 namespace gdh_engine {
 	namespace manager {
-		
-
 		class Renderer {
 		public:
 			void ClearWindowToRender();
@@ -35,8 +33,8 @@ namespace gdh_engine {
 				return instance_;
 			}
 
-			void ConvertCoordinatesForRender(object::Camera* camera, object::Object* target_object);
-			void Render(object::Object* target_obj);
+			void ConvertCoordinatesForRender(object::Camera* camera, object::VisibleObject* target_object);
+			void Render(object::VisibleObject* target_obj);
 
 			// it's callback function in openGL
 			static void ResizeWindowFrameBuffer(GLFWwindow* window, int fbw, int fbh);

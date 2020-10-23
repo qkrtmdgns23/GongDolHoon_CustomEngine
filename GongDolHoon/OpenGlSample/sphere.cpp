@@ -4,7 +4,7 @@
 namespace gdh_engine {
 	namespace object {
 		namespace primitive {
-			Sphere::Sphere() : Object("resource/shaders/sphere_vs.glsl",
+			Sphere::Sphere() : VisibleObject("resource/shaders/sphere_vs.glsl",
 				"resource/shaders/sphere_fs.glsl", "resource/jpg/container.jpg",
 				"resource/obj/sphere.obj", object::TextureType::k2DimensionalTexture, 
 				object::TextureType::kRGBTexture)

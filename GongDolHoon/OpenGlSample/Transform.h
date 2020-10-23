@@ -6,7 +6,7 @@
 #include "glm/gtc/matrix_transform.hpp"
 
 // custom header
-#include "IComponent.h"
+#include "interface_component.h"
 
 namespace gdh_engine {
 	namespace object {
@@ -15,14 +15,14 @@ namespace gdh_engine {
 			glm::vec3 position;
 			glm::vec3 rotation;
 			glm::vec3 scale;
-		}obj_transform_t;
+		}ObjTransformInform;
 
 		class Object;
 
-		class Transform : public IComponent
+		class Transform : public InterfaceComponent
 		{
 		public:
-			Transform(obj_transform_t transform_inform = { glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f) });
+			Transform(ObjTransformInform transform_inform = { glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f) });
 
 			// method
 			void Move(const glm::vec3 position);

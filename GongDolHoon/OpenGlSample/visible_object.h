@@ -1,11 +1,14 @@
-#ifndef GDH_ENGINE_OBJECT_H
-#define GDH_ENGINE_OBJECT_H
+#ifndef GDH_ENGINE_VISIBLE_OBJECT_H
+#define GDH_ENGINE_VISIBLE_OBJECT_H
 
 #include <string>
 #include <vector>
 
 // library
 #include "glm/glm.hpp"
+
+// custom library
+#include "interface_object.h"
 
 namespace gdh_engine {
 	namespace object {
@@ -17,20 +20,24 @@ namespace gdh_engine {
 
 		typedef struct ObjectTransformInformation obj_transform_t;
 
-		class Object
+		class VisibleObject : public InterfaceObject
 		{
 		public:
-			Object(const char* vertex_path, const char* fragment_path, const char* texture_path, 
+			// Constructer & Destructor
+			VisibleObject(const char* vertex_path, const char* fragment_path, const char* texture_path, 
 				const char* obj_path, obj_transform_t target_transform, 
 				TextureType dimensional_inform, TextureType alpha);
-			Object(std::string vertex_path, std::string fragment_path, std::string texture_path,
+			VisibleObject(std::string vertex_path, std::string fragment_path, std::string texture_path,
 				const char* obj_path, obj_transform_t target_transform,
 				TextureType dimensional_inform, TextureType alpha);
-			Object(const char* vertex_path, const char* fragment_path, const char* texture_path,
+			VisibleObject(const char* vertex_path, const char* fragment_path, const char* texture_path,
 				const char* obj_path, TextureType dimensional_inform, TextureType alpha);
-			Object(std::string vertex_path, const char* fragment_path, const char* texture_path,
+			VisibleObject(std::string vertex_path, const char* fragment_path, const char* texture_path,
 				const char* obj_path, TextureType dimensional_inform, TextureType alpha);
-			~Object();
+			virtual ~VisibleObject();
+
+			// Overriding
+			virtual void Update() override;
 
 			void SetupMesh();
 			void SetTextureUniformToShader(std::string tex_uniform_name, unsigned int tex_num);
@@ -68,4 +75,4 @@ namespace gdh_engine {
 	}	// namespace object
 }	// namespace gdh_engine
 
-#endif // GDH_ENGINE_OBJECT_H
+#endif // GDH_ENGINE_VISIBLE_OBJECT_H

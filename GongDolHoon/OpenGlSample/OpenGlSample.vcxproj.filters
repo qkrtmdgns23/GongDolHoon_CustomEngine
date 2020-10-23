@@ -783,19 +783,25 @@
     <ClInclude Include="texture.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="object.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="transform.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="camera.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="IComponent.h">
+    <ClInclude Include="sphere.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="sphere.h">
+    <ClInclude Include="interface_object.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="interface_component.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="invisible_object.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="visible_object.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -1225,9 +1231,6 @@
     <ClCompile Include="texture.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="object.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="transform.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -1235,6 +1238,12 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="sphere.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="invisible_object.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="visible_object.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

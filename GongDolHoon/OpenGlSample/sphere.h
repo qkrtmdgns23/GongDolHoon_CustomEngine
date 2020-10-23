@@ -1,12 +1,12 @@
 #ifndef GDH_ENGINE_SPHERE_H
 #define GDH_ENGINE_SPHERE_H
 
-#include "object.h"
+#include "visible_object.h"
 
 namespace gdh_engine {
 	namespace object {
 		namespace primitive {
-		class Sphere : public Object 
+		class Sphere : public VisibleObject
 		{
 		public:
 			Sphere();
