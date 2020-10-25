@@ -26,7 +26,7 @@
 * _[Ver 2.0.0] Add Primitive-Type Object. Edit Source Code with Using Interface. - 20.10.23_
 　  
 　  
-## Connect
+## Contact
 *e-mail: qkrtmdgns23@gmail.com*  
 *GML Laboratory, Dept. of Game Engineering, Hoseo Univ. Asan Campus 20 Hoseo-ro 79bungil, Baebang-eup, Asan-si, Chungnam-do 336-795 South Korea*
 
