@@ -1,4 +1,6 @@
-# GongDolHoon_CustomEngine
+# Repository Changed
+
+https://github.com/qkrtmdgns23/GameEngineArchitecture_GDH_Engine/tree/release_midterm_test
 
 ## Purpose
 * **Study Memory Management in C++**
